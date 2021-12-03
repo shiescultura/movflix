@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 
 // import example from './module-example'
-
+import movies from './modules/movies'
 Vue.use(Vuex)
 
 /*
@@ -17,7 +17,7 @@ Vue.use(Vuex)
 export default function (/* { ssrContext } */) {
   const Store = new Vuex.Store({
     modules: {
-      // example
+      movies
     },
 
     // enable strict mode (adds overhead!)

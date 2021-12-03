@@ -1,5 +1,6 @@
 <template>
   <div id="q-app">
+    <!-- <h1>hello worl sadasdasd</h1> -->
     <router-view />
   </div>
 </template>
