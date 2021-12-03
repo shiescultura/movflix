@@ -1,29 +1,8 @@
 
 <template>
 <div class="MovieSlider__wrapper">
+  <MovieDetail ref="movieDetailRef"/>
   <div class="example-3d">
-    <!-- <swiper class="swiper" :options="swiperOption">
-        <swiper-slide v-for="(movie) in movies" :key="movie.id.label">
-          <div class="MovieCard" @click="view(movie)">
-            <div class="MovieCard___img">
-              <img :src="movie['im:image'][2]['label']" style="height:400px;width:300px;object-fit:cover;"/>
-              <div class="MovieCard__details">
-                <div class="MovieCard__title">
-                  {{movie['im:name']['label']}}
-                </div>
-                <div class="MovieCard__artist">
-                  {{movie['im:artist']['label']}}
-                </div>
-              </div>
-              <div class="MovieCard__action">
-                <p>Action</p>
-              </div>
-            </div>
-          </div>
-        </swiper-slide>
-      <div class="swiper-pagination" slot="pagination" style="display:none;"></div>
-    </swiper> -->
-    <br>
     <swiper class="swiper" :options="swiperOption">
         <swiper-slide v-for="(movie) in movies" :key="movie.id.label">
           <q-card class="my-card" style="width:300px;">
@@ -38,14 +17,11 @@
                 </div>
               </div>
             </q-card-section>
-
             <q-separator />
-
             <q-card-actions class="row items-center">
-              <!-- <q-btn flat icon="event" /> -->
               <q-btn flat color="red" icon="favorite" />
               <q-btn flat color="teal" icon="play_arrow" />
-              <q-btn flat color="primary" icon="info" />
+              <q-btn flat color="primary" icon="info" @click="viewInfo(movie)" />
             </q-card-actions>
           </q-card>
         </swiper-slide>
@@ -58,16 +34,20 @@
 <script>
 import { Swiper, SwiperSlide } from 'vue-awesome-swiper'
 import 'swiper/css/swiper.css'
+import MovieDetail from './MovieDetails.vue'
 
 export default {
   name: 'swiper-example-3d-coverflow',
   title: '3D Coverflow effect',
   components: {
     Swiper,
-    SwiperSlide
+    SwiperSlide,
+    MovieDetail
   },
   data () {
     return {
+      bar2: false,
+      movie: {},
       swiperOption: {
         effect: 'coverflow',
         grabCursor: true,
@@ -91,7 +71,9 @@ export default {
     console.log('created')
   },
   methods: {
-    view (movie) {
+    viewInfo (movie) {
+      this.$refs.movieDetailRef.movieModal = true
+      this.$refs.movieDetailRef.movie = Object.assign({}, movie)
       console.log('movie', movie)
     }
   },
