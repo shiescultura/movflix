@@ -14,23 +14,127 @@
         @mouseover="miniState = false"
         @mouseout="miniState = true"
 
-        :width="200"
+        :width="300"
         :breakpoint="500"
-        bordered
-        content-class="bg-grey-3"
+        content-class="bg-grey-10 text-white"
       >
         <q-scroll-area class="fit">
           <q-list padding>
-            <q-item clickable v-ripple>
+            <q-item clickable v-ripple @click="home()">
               <q-item-section avatar>
-                <q-icon name="inbox" />
+                <q-icon name="home" />
               </q-item-section>
 
               <q-item-section>
-                Inbox
+                Home
               </q-item-section>
             </q-item>
 
+            <q-expansion-item
+              icon="local_movies"
+              label="Genres"
+            >
+              <q-item
+                clickable
+                v-ripple
+                @click="filterGenre('Action & Adventure')"
+              >
+                <q-item-section avatar>
+                  <q-icon name="blur_on" />
+                </q-item-section>
+                <q-item-section>Action & Adventure</q-item-section>
+              </q-item>
+              <q-item
+                clickable
+                v-ripple
+                @click="filterGenre('Comedy')"
+              >
+                <q-item-section avatar>
+                  <q-icon name="blur_on" />
+                </q-item-section>
+                <q-item-section>Comedy</q-item-section>
+              </q-item>
+              <q-item
+                clickable
+                v-ripple
+                @click="filterGenre('Drama')"
+              >
+                <q-item-section avatar>
+                  <q-icon name="blur_on" />
+                </q-item-section>
+                <q-item-section>Drama</q-item-section>
+              </q-item>
+              <q-item
+                clickable
+                v-ripple
+                @click="filterGenre('Horror')"
+              >
+                <q-item-section avatar>
+                  <q-icon name="blur_on" />
+                </q-item-section>
+                <q-item-section>Horror</q-item-section>
+              </q-item>
+              <q-item
+                clickable
+                v-ripple
+                @click="filterGenre('Independent')"
+              >
+                <q-item-section avatar>
+                  <q-icon name="blur_on" />
+                </q-item-section>
+                <q-item-section>Independent</q-item-section>
+              </q-item>
+              <q-item
+                clickable
+                v-ripple
+                @click="filterGenre('Kids & Family')"
+              >
+                <q-item-section avatar>
+                  <q-icon name="blur_on" />
+                </q-item-section>
+                <q-item-section>Kids & Family</q-item-section>
+              </q-item>
+              <q-item
+                clickable
+                v-ripple
+                @click="filterGenre('Musicals')"
+              >
+                <q-item-section avatar>
+                  <q-icon name="blur_on" />
+                </q-item-section>
+                <q-item-section>Musicals</q-item-section>
+              </q-item>
+              <q-item
+                clickable
+                v-ripple
+                @click="filterGenre('Romance')"
+              >
+                <q-item-section avatar>
+                  <q-icon name="blur_on" />
+                </q-item-section>
+                <q-item-section>Romance</q-item-section>
+              </q-item>
+              <q-item
+                clickable
+                v-ripple
+                @click="filterGenre('Thriller')"
+              >
+                <q-item-section avatar>
+                  <q-icon name="blur_on" />
+                </q-item-section>
+                <q-item-section>Thriller</q-item-section>
+              </q-item>
+              <q-item
+                clickable
+                v-ripple
+                @click="filterGenre('Western')"
+              >
+                <q-item-section avatar>
+                  <q-icon name="blur_on" />
+                </q-item-section>
+                <q-item-section>Western</q-item-section>
+              </q-item>
+            </q-expansion-item>
             <q-item active clickable v-ripple>
               <q-item-section avatar>
                 <q-icon name="star" />
@@ -38,28 +142,6 @@
 
               <q-item-section>
                 Star
-              </q-item-section>
-            </q-item>
-
-            <q-item clickable v-ripple>
-              <q-item-section avatar>
-                <q-icon name="send" />
-              </q-item-section>
-
-              <q-item-section>
-                Send
-              </q-item-section>
-            </q-item>
-
-            <q-separator />
-
-            <q-item clickable v-ripple>
-              <q-item-section avatar>
-                <q-icon name="drafts" />
-              </q-item-section>
-
-              <q-item-section>
-                Drafts
               </q-item-section>
             </q-item>
           </q-list>
@@ -80,6 +162,15 @@ export default {
     return {
       drawer: false,
       miniState: true
+    }
+  },
+  methods: {
+    filterGenre (value) {
+      this.$store.dispatch('movies/loadGenre', value)
+      console.log('value', value)
+    },
+    home () {
+      this.$store.dispatch('movies/loadMovies')
     }
   }
 }

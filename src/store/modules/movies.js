@@ -23,8 +23,19 @@ export default {
       try {
         const response = await axios.get()
         const data = response.data.feed.entry
-        const allmovies = data.filter((data) => data.category.attributes.term === 'Action & Adventure')
-        commit('setMovies', allmovies)
+        // const allmovies = data.filter((data) => data.category.attributes.term === 'Action & Adventure')
+        commit('setMovies', data)
+      } catch (error) {
+        console.log(error)
+      }
+    },
+    async loadGenre (context, payload) {
+      try {
+        console.log('payload', payload)
+        const response = await axios.get()
+        const data = response.data.feed.entry
+        const allmovies = data.filter((data) => data.category.attributes.term === payload)
+        context.commit('setMovies', allmovies)
       } catch (error) {
         console.log(error)
       }
