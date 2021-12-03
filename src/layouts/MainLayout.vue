@@ -3,7 +3,7 @@
       <q-header elevated class="bg-black">
         <q-toolbar>
           <q-btn flat @click="drawer = !drawer" round dense icon="menu" />
-          <q-toolbar-title>Movflix</q-toolbar-title>
+          <q-toolbar-title>Movflix <span v-show="category">> {{category}} </span></q-toolbar-title>
         </q-toolbar>
       </q-header>
       <q-drawer
@@ -137,11 +137,11 @@
             </q-expansion-item>
             <q-item active clickable v-ripple>
               <q-item-section avatar>
-                <q-icon name="star" />
+                <q-icon name="favorite" />
               </q-item-section>
 
               <q-item-section>
-                Star
+                Favorite
               </q-item-section>
             </q-item>
           </q-list>
@@ -170,7 +170,16 @@ export default {
       console.log('value', value)
     },
     home () {
-      this.$store.dispatch('movies/loadMovies')
+      this.$store.dispatch('movies/genreTitle')
+    }
+  },
+  created () {
+    this.$store.dispatch('movies/genreTitle')
+    console.log('created')
+  },
+  computed: {
+    category () {
+      return this.$store.state.movies.genre
     }
   }
 }

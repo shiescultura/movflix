@@ -8,6 +8,7 @@ export default {
     movies: [],
     filter: '',
     genreAction: [],
+    genre: '',
     alldata: 'alldatawillbedisplayed'
   },
   mutations: {
@@ -16,6 +17,9 @@ export default {
     },
     setMovies (state, payload) {
       state.movies = payload
+    },
+    setGenre (state, payload) {
+      state.genre = payload
     }
   },
   actions: {
@@ -36,6 +40,16 @@ export default {
         const data = response.data.feed.entry
         const allmovies = data.filter((data) => data.category.attributes.term === payload)
         context.commit('setMovies', allmovies)
+        context.commit('setGenre', payload)
+      } catch (error) {
+        console.log(error)
+      }
+    },
+    async genreTitle (context, payload) {
+      try {
+        console.log('payload', payload)
+        const category = payload
+        context.commit('setGenre', category)
       } catch (error) {
         console.log(error)
       }
@@ -59,6 +73,9 @@ export default {
     },
     genreAction: state => {
       return state.movies.filter((data) => data.category.attributes.term === 'Drama')
+    },
+    genreCat: state => {
+      return state.genre
     }
   }
 }

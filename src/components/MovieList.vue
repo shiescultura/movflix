@@ -1,15 +1,16 @@
 <template>
   <div class="q-pa-md">
   <MovieDetail ref="movieDetailRef"/>
+  <!-- <h3>{{category}}</h3> -->
     <q-table
       grid
       card-class="bg-primary text-white"
-      title="Movies"
       :data="movies"
       :columns="columns"
       row-key="name"
       :filter="filter"
       hide-header
+      :pagination="pagination"
     >
       <template v-slot:item="props">
         <div class="q-pa-xs col-xs-12 col-sm-6 col-md-2">
@@ -44,6 +45,9 @@ export default {
   },
   data () {
     return {
+      pagination: {
+        rowsPerPage: 12
+      },
       filter: '',
       columns: [
         {
@@ -63,6 +67,7 @@ export default {
   },
   created () {
     this.$store.dispatch('movies/loadMovies')
+    this.$store.dispatch('movies/genreTitle')
     console.log('created')
   },
   methods: {
@@ -75,6 +80,9 @@ export default {
   computed: {
     movies () {
       return this.$store.state.movies.movies
+    },
+    category () {
+      return this.$store.state.movies.genre
     }
   }
 }
