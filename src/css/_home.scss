@@ -1,0 +1,25 @@
+.Home {
+  &__top-movie {
+    padding: 10rem;
+    @include sm {
+      min-height: 80vh;
+    }
+    @include xl {
+      background-position: 25rem top;
+    }
+  }
+
+  &__main-slider {
+    height: 100vh;
+    @include sm {
+      height: 80vh;
+    }
+    .MovieDetails {
+      padding-top: 3rem;
+    }
+  }
+
+  &__slider-list {
+    padding: 2rem 0;
+  }
+}
