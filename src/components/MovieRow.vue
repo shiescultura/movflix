@@ -18,10 +18,9 @@
               </div>
             </q-card-section>
             <q-separator />
-            <q-card-actions class="row items-center">
+            <q-card-actions style="float:right;padding-right:20px;">
               <q-btn flat color="red" icon="favorite" />
-              <q-btn flat color="teal" icon="play_arrow" />
-              <q-btn flat color="primary" icon="info" @click="viewInfo(movie)" />
+              <q-btn flat color="dark" icon="info" @click="viewInfo(movie)" />
             </q-card-actions>
           </q-card>
         </swiper-slide>

@@ -1,39 +1,70 @@
 <template>
-  <q-layout view="lHh Lpr lFf">
-    <q-header elevated class="bg-grey-10">
-      <q-toolbar>
-        <q-btn
-          flat
-          dense
-          round
-          icon="menu"
-          aria-label="Menu"
-          @click="leftDrawerOpen = !leftDrawerOpen"
-        />
+    <q-layout view="hHh Lpr lff" container style="height: 100vh" class="shadow-2 rounded-borders">
+      <q-header elevated class="bg-black">
+        <q-toolbar>
+          <q-btn flat @click="drawer = !drawer" round dense icon="menu" />
+          <q-toolbar-title>Movflix</q-toolbar-title>
+        </q-toolbar>
+      </q-header>
+      <q-drawer
+        v-model="drawer"
+        show-if-above
 
-        <q-toolbar-title>
-          Movflix
-        </q-toolbar-title>
+        :mini="miniState"
+        @mouseover="miniState = false"
+        @mouseout="miniState = true"
 
-        <!-- <div>Quasar v{{ $q.version }}</div> -->
-      </q-toolbar>
-    </q-header>
+        :width="200"
+        :breakpoint="500"
+        bordered
+        content-class="bg-grey-3"
+      >
+        <q-scroll-area class="fit">
+          <q-list padding>
+            <q-item clickable v-ripple>
+              <q-item-section avatar>
+                <q-icon name="inbox" />
+              </q-item-section>
 
-    <q-drawer
-      v-model="leftDrawerOpen"
-      show-if-above
-      content-class="bg-blue-grey-10"
-    >
-      <q-list>
-        <q-item-label
-          header
-          class="text-grey-8"
-        >
-          Essential Links
-        </q-item-label>
+              <q-item-section>
+                Inbox
+              </q-item-section>
+            </q-item>
 
-      </q-list>
-    </q-drawer>
+            <q-item active clickable v-ripple>
+              <q-item-section avatar>
+                <q-icon name="star" />
+              </q-item-section>
+
+              <q-item-section>
+                Star
+              </q-item-section>
+            </q-item>
+
+            <q-item clickable v-ripple>
+              <q-item-section avatar>
+                <q-icon name="send" />
+              </q-item-section>
+
+              <q-item-section>
+                Send
+              </q-item-section>
+            </q-item>
+
+            <q-separator />
+
+            <q-item clickable v-ripple>
+              <q-item-section avatar>
+                <q-icon name="drafts" />
+              </q-item-section>
+
+              <q-item-section>
+                Drafts
+              </q-item-section>
+            </q-item>
+          </q-list>
+        </q-scroll-area>
+      </q-drawer>
 
     <q-page-container>
       <router-view />
@@ -47,7 +78,8 @@ export default {
   name: 'MainLayout',
   data () {
     return {
-      leftDrawerOpen: false
+      drawer: false,
+      miniState: true
     }
   }
 }
