@@ -82,6 +82,12 @@ export default {
     },
     removeFromFavorite (favorite) {
       favorite.favorite = false
+      this.$q.notify({
+        position: 'center',
+        message: 'Movie has been removed to your favorite list.',
+        icon: 'favorite',
+        color: 'danger'
+      })
       this.$store.dispatch('movies/removeFavorite', favorite)
     }
   },
