@@ -69,10 +69,13 @@ export default {
     },
     favorite (props) {
       const favemovie = props
-      favemovie.favorite = true
       this.$store.dispatch('movies/addFavorite', favemovie)
-      this.$store.dispatch('movies/updateMovie', favemovie)
-      // console.log('favorite', props)
+      this.$q.notify({
+        position: 'center',
+        message: 'Movie has been added to your favorite list.',
+        icon: 'favorite',
+        color: 'positive'
+      })
     }
   },
   computed: {
