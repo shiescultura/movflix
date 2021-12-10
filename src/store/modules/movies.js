@@ -29,6 +29,11 @@ export default {
         return
       }
       state.favorites.push({ movie })
+    },
+    removeFavorite (state, movie) {
+      const index = state.favorites.findIndex(r => r.idNo === movie.idNo)
+      console.log('deleteeee')
+      state.favorites.splice(index, 1)
     }
   },
   actions: {
@@ -36,7 +41,8 @@ export default {
       try {
         const response = await axios.get()
         const data = response.data.feed.entry
-        commit('setMovies', data)
+        const allmovies = data.filter((data) => data.category.attributes.term === 'Action & Adventure')
+        commit('setMovies', allmovies)
       } catch (error) {
         console.log(error)
       }
@@ -52,35 +58,22 @@ export default {
         console.log(error)
       }
     },
-    async genreTitle (context, payload) {
-      try {
-        const category = payload
-        context.commit('setGenre', category)
-      } catch (error) {
-        console.log(error)
-      }
-    },
-    async fetchMovieList ({ commit }) {
-      try {
-        const response = await axios.get()
-        const data = response.data.feed.entry
-        commit('setMovies', data)
-      } catch (error) {
-        console.log(error)
-      }
-    },
     async addFavorite ({ commit }, payload) {
       try {
         commit('addToFavorite', payload)
       } catch (error) {
         console.log(error)
       }
+    },
+    async removeFavorite ({ commit }, payload) {
+      try {
+        commit('removeFavorite', payload)
+      } catch (error) {
+        console.log(error)
+      }
     }
   },
   getters: {
-    topTen: state => {
-      return state.movies
-    },
     favorites: state => {
       return state.favorites
     },

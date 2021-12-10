@@ -33,7 +33,7 @@
             </q-card-section>
             <q-separator />
             <q-card-actions style="float:right;padding-right:20px;">
-              <q-btn flat color="red" icon="favorite" @click="favorite(props.row)" />
+              <q-btn flat color="red" icon="favorite_border" @click="favorite(props.row)" />
               <q-btn flat color="dark" icon="info" @click="viewInfo(props.row)" />
             </q-card-actions>
           </q-card>
@@ -58,7 +58,7 @@ export default {
   },
   created () {
     this.$store.dispatch('movies/loadMovies')
-    this.$store.dispatch('movies/genreTitle')
+    // this.$store.dispatch('movies/genreTitle')
     console.log('created')
   },
   methods: {
@@ -68,8 +68,11 @@ export default {
       console.log('movie', props)
     },
     favorite (props) {
-      this.$store.dispatch('movies/addFavorite', props)
-      console.log('favorite', props)
+      const favemovie = props
+      favemovie.favorite = true
+      this.$store.dispatch('movies/addFavorite', favemovie)
+      this.$store.dispatch('movies/updateMovie', favemovie)
+      // console.log('favorite', props)
     }
   },
   computed: {

@@ -178,13 +178,10 @@ export default {
     filterGenre (value) {
       this.$store.dispatch('movies/loadGenre', value)
       console.log('value', value)
-    },
-    home () {
-      this.$store.dispatch('movies/genreTitle')
     }
   },
   created () {
-    this.$store.dispatch('movies/genreTitle')
+    this.$store.dispatch('movies/loadMovies')
     console.log('created')
   },
   computed: {

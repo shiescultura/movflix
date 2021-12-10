@@ -19,7 +19,7 @@
             </q-card-section>
             <q-separator />
             <q-card-actions style="float:right;padding-right:20px;">
-              <q-btn flat color="red" icon="favorite" @click="favorite(movie)" />
+              <q-btn flat color="red"  icon="favorite_border" @click="favorite(movie)" />
               <q-btn flat color="dark" icon="info" @click="viewInfo(movie)" />
             </q-card-actions>
           </q-card>
@@ -76,8 +76,15 @@ export default {
       console.log('movie', movie)
     },
     favorite (movie) {
-      this.$store.dispatch('movies/addFavorite', movie)
-      console.log(movie)
+      const favemovie = { ...movie }
+      movie.favorite = true
+      this.$store.dispatch('movies/addFavorite', favemovie)
+      this.$q.notify({
+        position: 'center',
+        message: 'Movie has been added to your favorite list.',
+        icon: 'favorite',
+        color: 'positive'
+      })
     }
   },
   computed: {

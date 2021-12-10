@@ -4,22 +4,22 @@
   <MovieDetail ref="movieDetailRef"/>
   <div class="example-3d">
     <swiper class="swiper" :options="swiperOption">
-        <swiper-slide v-for="(favorite) in favorites" :key="favorite.movie.idNo">
+        <swiper-slide v-for="(fave) in favorites" :key="fave.movie.idNo">
           <q-card class="my-card" style="width:300px;">
-            <q-img :src="favorite.movie['im:image'][2]['label']" style="height:300px;" />
+            <q-img :src="fave.movie['im:image'][2]['label']" style="height:300px;" />
             <q-card-section style="height:100px;">
               <div class="row no-wrap items-center">
                 <div class="col text-h6">
-                  {{favorite.movie['im:name']['label']}}
+                  {{fave.movie['im:name']['label']}}
                 </div>
                 <div class="col-auto text-grey text-caption q-pt-md row no-wrap items-center">
-                   {{favorite.movie['im:artist']['label']}}
+                   {{fave.movie['im:artist']['label']}}
                 </div>
               </div>
             </q-card-section>
             <q-separator />
             <q-card-actions style="float:right;padding-right:20px;">
-              <q-btn flat color="red" icon="favorite" @click="favorite(favorite)" />
+              <q-btn flat color="dark" icon="favorite" @click="removeFromFavorite(favorite)" />
               <q-btn flat color="dark" icon="info" @click="viewInfo(favorite)" />
             </q-card-actions>
           </q-card>
@@ -79,6 +79,10 @@ export default {
     favorite (favorite) {
       this.$store.dispatch('movies/addFavorite', favorite)
       console.log(favorite)
+    },
+    removeFromFavorite (favorite) {
+      favorite.favorite = false
+      this.$store.dispatch('movies/removeFavorite', favorite)
     }
   },
   computed: {
