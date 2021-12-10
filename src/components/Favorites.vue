@@ -4,7 +4,7 @@
   <MovieDetail ref="movieDetailRef"/>
   <div class="example-3d">
     <swiper class="swiper" :options="swiperOption">
-        <swiper-slide v-for="(movie) in movies" :key="movie.idNo">
+        <swiper-slide v-for="(movie) in favorites" :key="movie.idNo">
           <q-card class="my-card" style="width:300px;">
             <q-img :src="movie['im:image'][2]['label']" style="height:300px;" />
             <q-card-section style="height:100px;">
@@ -28,9 +28,6 @@
       <div class="swiper-pagination" slot="pagination" style="display:none;"></div>
     </swiper>
   </div>
-  <!-- <pre>
-    {{favorites}}
-  </pre> -->
 </div>
 </template>
 
@@ -85,9 +82,9 @@ export default {
     }
   },
   computed: {
-    movies () {
-      return this.$store.getters['movies/movies']
-    },
+    // movies () {
+    //   return this.$store.getters['movies/movies']
+    // },
     favorites () {
       return this.$store.getters['movies/favorites']
     }

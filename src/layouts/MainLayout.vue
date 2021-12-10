@@ -20,7 +20,7 @@
       >
         <q-scroll-area class="fit">
           <q-list padding>
-            <q-item clickable v-ripple @click="home()">
+            <q-item clickable v-ripple @click="filterGenre('Action & Adventure')" to="/">
               <q-item-section avatar>
                 <q-icon name="home" />
               </q-item-section>
@@ -35,6 +35,7 @@
               label="Genres"
             >
               <q-item
+                to="/"
                 clickable
                 v-ripple
                 @click="filterGenre('Action & Adventure')"
@@ -45,6 +46,7 @@
                 <q-item-section>Action & Adventure</q-item-section>
               </q-item>
               <q-item
+                to="/"
                 clickable
                 v-ripple
                 @click="filterGenre('Comedy')"
@@ -55,6 +57,7 @@
                 <q-item-section>Comedy</q-item-section>
               </q-item>
               <q-item
+                to="/"
                 clickable
                 v-ripple
                 @click="filterGenre('Drama')"
@@ -65,6 +68,7 @@
                 <q-item-section>Drama</q-item-section>
               </q-item>
               <q-item
+                to="/"
                 clickable
                 v-ripple
                 @click="filterGenre('Horror')"
@@ -75,6 +79,7 @@
                 <q-item-section>Horror</q-item-section>
               </q-item>
               <q-item
+                to="/"
                 clickable
                 v-ripple
                 @click="filterGenre('Independent')"
@@ -85,6 +90,7 @@
                 <q-item-section>Independent</q-item-section>
               </q-item>
               <q-item
+                to="/"
                 clickable
                 v-ripple
                 @click="filterGenre('Kids & Family')"
@@ -95,6 +101,7 @@
                 <q-item-section>Kids & Family</q-item-section>
               </q-item>
               <q-item
+                to="/"
                 clickable
                 v-ripple
                 @click="filterGenre('Musicals')"
@@ -105,6 +112,7 @@
                 <q-item-section>Musicals</q-item-section>
               </q-item>
               <q-item
+                to="/"
                 clickable
                 v-ripple
                 @click="filterGenre('Romance')"
@@ -115,6 +123,7 @@
                 <q-item-section>Romance</q-item-section>
               </q-item>
               <q-item
+                to="/"
                 clickable
                 v-ripple
                 @click="filterGenre('Thriller')"
@@ -125,6 +134,7 @@
                 <q-item-section>Thriller</q-item-section>
               </q-item>
               <q-item
+                to="/"
                 clickable
                 v-ripple
                 @click="filterGenre('Western')"
@@ -135,7 +145,7 @@
                 <q-item-section>Western</q-item-section>
               </q-item>
             </q-expansion-item>
-            <q-item active clickable v-ripple>
+            <q-item active clickable v-ripple to="/favorites">
               <q-item-section avatar>
                 <q-icon name="favorite" />
               </q-item-section>

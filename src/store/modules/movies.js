@@ -7,9 +7,9 @@ export default {
     loading: false,
     movies: [],
     filter: '',
-    genreAction: [],
-    genre: '',
-    alldata: 'alldatawillbedisplayed'
+    movie: null,
+    alldata: [],
+    favorites: []
   },
   mutations: {
     set_isLoading (state, loading) {
@@ -20,6 +20,15 @@ export default {
     },
     setGenre (state, payload) {
       state.genre = payload
+    },
+    addToFavorite (state, movie) {
+      const movieInFavorite = state.favorites.find(item => {
+        return item.movie.idNo === movie.idNo
+      })
+      if (movieInFavorite) {
+        return
+      }
+      state.favorites.push({ movie })
     }
   },
   actions: {
@@ -27,7 +36,6 @@ export default {
       try {
         const response = await axios.get()
         const data = response.data.feed.entry
-        // const allmovies = data.filter((data) => data.category.attributes.term === 'Action & Adventure')
         commit('setMovies', data)
       } catch (error) {
         console.log(error)
@@ -62,20 +70,30 @@ export default {
       } catch (error) {
         console.log(error)
       }
+    },
+    async addFavorite ({ commit }, payload) {
+      try {
+        commit('addToFavorite', payload)
+      } catch (error) {
+        console.log(error)
+      }
     }
   },
   getters: {
-    allmovies: state => {
+    topTen: state => {
       return state.movies
     },
-    alldata: state => {
-      return state.alldata
+    favorites: state => {
+      return state.favorites
     },
-    genreAction: state => {
-      return state.movies.filter((data) => data.category.attributes.term === 'Drama')
-    },
-    genreCat: state => {
-      return state.genre
+    movies: state => {
+      const movies = state.movies.map(x => {
+        x.idNo = x.id.attributes['im:id']
+        x.artist = x['im:artist'].label
+        x.movieTitle = x['im:name'].label
+        return x
+      })
+      return movies
     }
   }
 }

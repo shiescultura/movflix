@@ -4,40 +4,37 @@
   <MovieDetail ref="movieDetailRef"/>
   <div class="example-3d">
     <swiper class="swiper" :options="swiperOption">
-        <swiper-slide v-for="(movie) in movies" :key="movie.idNo">
+        <swiper-slide v-for="(favorite) in favorites" :key="favorite.movie.idNo">
           <q-card class="my-card" style="width:300px;">
-            <q-img :src="movie['im:image'][2]['label']" style="height:300px;" />
+            <q-img :src="favorite.movie['im:image'][2]['label']" style="height:300px;" />
             <q-card-section style="height:100px;">
               <div class="row no-wrap items-center">
                 <div class="col text-h6">
-                  {{movie['im:name']['label']}}
+                  {{favorite.movie['im:name']['label']}}
                 </div>
                 <div class="col-auto text-grey text-caption q-pt-md row no-wrap items-center">
-                   {{movie['im:artist']['label']}}
+                   {{favorite.movie['im:artist']['label']}}
                 </div>
               </div>
             </q-card-section>
             <q-separator />
             <q-card-actions style="float:right;padding-right:20px;">
-              <q-btn flat color="red" icon="favorite" @click="favorite(movie)" />
-              <q-btn flat color="dark" icon="info" @click="viewInfo(movie)" />
+              <q-btn flat color="red" icon="favorite" @click="favorite(favorite)" />
+              <q-btn flat color="dark" icon="info" @click="viewInfo(favorite)" />
             </q-card-actions>
           </q-card>
         </swiper-slide>
-        <!-- <swiper-slide > </swiper-slide> -->
+        <swiper-slide > </swiper-slide>
       <div class="swiper-pagination" slot="pagination" style="display:none;"></div>
     </swiper>
   </div>
-  <!-- <pre>
-    {{favorites}}
-  </pre> -->
 </div>
 </template>
 
 <script>
 import { Swiper, SwiperSlide } from 'vue-awesome-swiper'
 import 'swiper/css/swiper.css'
-import MovieDetail from './MovieDetails.vue'
+import MovieDetail from '../components/MovieDetails.vue'
 
 export default {
   name: 'swiper-example-3d-coverflow',
@@ -74,26 +71,20 @@ export default {
     console.log('created')
   },
   methods: {
-    viewInfo (movie) {
+    viewInfo (favorite) {
       this.$refs.movieDetailRef.movieModal = true
-      this.$refs.movieDetailRef.movie = Object.assign({}, movie)
-      console.log('movie', movie)
+      this.$refs.movieDetailRef.movie = Object.assign({}, favorite.movie)
+      console.log('movie', favorite.movie)
     },
-    favorite (movie) {
-      this.$store.dispatch('movies/addFavorite', movie)
-      console.log(movie)
+    favorite (favorite) {
+      this.$store.dispatch('movies/addFavorite', favorite)
+      console.log(favorite)
     }
   },
   computed: {
-    movies () {
-      return this.$store.getters['movies/movies']
-    },
     favorites () {
       return this.$store.getters['movies/favorites']
     }
-    // allData () {
-    //   return this.$store.state.movies.alldata
-    // }
   }
 }
 </script>

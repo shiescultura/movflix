@@ -28,7 +28,7 @@
             </q-card-section>
             <q-separator />
             <q-card-actions style="float:right;padding-right:20px;">
-              <q-btn flat color="red" icon="favorite" />
+              <q-btn flat color="red" icon="favorite" @click="favorite(props.row)" />
               <q-btn flat color="dark" icon="info" @click="viewInfo(props.row)" />
             </q-card-actions>
           </q-card>
@@ -75,6 +75,10 @@ export default {
       this.$refs.movieDetailRef.movieModal = true
       this.$refs.movieDetailRef.movie = Object.assign({}, props)
       console.log('movie', props)
+    },
+    favorite (props) {
+      this.$store.dispatch('movies/addFavorite', props)
+      console.log('favorite', props)
     }
   },
   computed: {
