@@ -1,17 +1,22 @@
 <template>
   <div class="q-pa-md">
   <MovieDetail ref="movieDetailRef"/>
-  <!-- <h3>{{category}}</h3> -->
     <q-table
       grid
       card-class="bg-primary text-white"
       :data="movies"
-      :columns="columns"
       row-key="name"
       :filter="filter"
       hide-header
       :pagination="pagination"
     >
+      <template v-slot:top-right>
+        <q-input borderless dense debounce="300" v-model="filter" placeholder="Search">
+          <template v-slot:append>
+            <q-icon name="search" />
+          </template>
+        </q-input>
+      </template>
       <template v-slot:item="props">
         <div class="q-pa-xs col-xs-12 col-sm-6 col-md-2">
           <q-card class="my-card" style="height: 500px;">
@@ -48,21 +53,7 @@ export default {
       pagination: {
         rowsPerPage: 12
       },
-      filter: '',
-      columns: [
-        {
-          name: 'desc',
-          required: true,
-          label: 'Dessert (100g serving)',
-          align: 'left',
-          field: row => ['row']['im:name'].label,
-          format: val => `${val}`,
-          sortable: true
-        },
-        { name: 'calories', align: 'center', label: 'Calories', field: 'calories', sortable: true },
-        { name: 'fat', label: 'Fat (g)', field: 'fat', sortable: true },
-        { name: 'carbs', label: 'Carbs (g)', field: 'carbs' }
-      ]
+      filter: ''
     }
   },
   created () {

@@ -43,7 +43,6 @@ export default {
     },
     async loadGenre (context, payload) {
       try {
-        console.log('payload', payload)
         const response = await axios.get()
         const data = response.data.feed.entry
         const allmovies = data.filter((data) => data.category.attributes.term === payload)
@@ -55,7 +54,6 @@ export default {
     },
     async genreTitle (context, payload) {
       try {
-        console.log('payload', payload)
         const category = payload
         context.commit('setGenre', category)
       } catch (error) {

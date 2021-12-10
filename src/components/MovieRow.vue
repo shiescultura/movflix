@@ -24,13 +24,9 @@
             </q-card-actions>
           </q-card>
         </swiper-slide>
-        <!-- <swiper-slide > </swiper-slide> -->
       <div class="swiper-pagination" slot="pagination" style="display:none;"></div>
     </swiper>
   </div>
-  <!-- <pre>
-    {{favorites}}
-  </pre> -->
 </div>
 </template>
 
@@ -91,9 +87,6 @@ export default {
     favorites () {
       return this.$store.getters['movies/favorites']
     }
-    // allData () {
-    //   return this.$store.state.movies.alldata
-    // }
   }
 }
 </script>
